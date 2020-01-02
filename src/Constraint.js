@@ -11,7 +11,6 @@ export default class Constraint extends Component {
         }
         this.onClick = this.onClick.bind(this)
         this.getPopupVal = this.getPopupVal.bind(this)
-        this.resizeConstraints = this.resizeConstraints.bind(this)
         this.closePopup = this.closePopup.bind(this)
     }
 
@@ -25,15 +24,18 @@ export default class Constraint extends Component {
 
     }
 
-    getPopupVal(value) {
+    getPopupVal(value, axis) {
         this.setState({
             value: value
         })
-        this.closePopup()
-    }
+        if (axis !== "rows") {
+            this.props.passPopupVal(value, axis, this.props.col)
+        }
+        else if (axis !== "cols") {
+            this.props.passPopupVal(value, axis, this.props.row)
+        }
 
-    resizeConstraints(new_len, axis) {
-        this.props.resizeConstraints(new_len, axis)
+        this.closePopup()
     }
 
     closePopup() {
@@ -47,10 +49,10 @@ export default class Constraint extends Component {
         return (
             <span className="constraintWrapper">
                 <div className="gridSquare constraint" style={{ "background-color": "gray", "color": "black" }} onClick={this.onClick}>
-                    0
+                    {this.props.value}
                 </div>
                 <span>
-                    {this.props.showPopup ? <Popup resizeConstraints={this.resizeConstraints}
+                    {this.props.showPopup ? <Popup
                         passVal={this.getPopupVal}
                         rows={this.props.rows} cols={this.props.cols}
                         row={this.props.row} col={this.props.col}

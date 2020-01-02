@@ -9,10 +9,11 @@ export default class Page extends Component {
         super(props)
 
         this.state = {
-            rows: 15,
-            cols: 15
+            rows: 4,
+            cols: 4
         }
         this.getFormValue = this.getFormValue.bind(this)
+        this.update = this.update.bind(this)
     }
 
     getFormValue = (name, value) => {
@@ -23,12 +24,17 @@ export default class Page extends Component {
         }
     }
 
+    update() {
+        console.log("parent updating")
+        this.forceUpdate()
+    }
+
     render() {
         return (
             <div className="page">
                 <RowColForm name="Number of Rows (Max 25)" id="rows" passValue={this.getFormValue} />
                 <RowColForm name="Number of Cols (Max 25)" id="cols" passValue={this.getFormValue} />
-                <Grid rows={this.state.rows} cols={this.state.cols} />
+                <Grid rows={this.state.rows} cols={this.state.cols} updateParent={this.update} />
             </div>
         )
     }
