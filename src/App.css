@@ -3,6 +3,7 @@
   /* color: white; */
   background-color: rgb(106, 182, 180);
   height: 100vh;
+  min-height: min-content;
   width: 100vw;
 }
 
