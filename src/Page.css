@@ -4,6 +4,7 @@
     align-items: center;
     width: 100vw;
     background-color: #6ab6b4;
+    overflow: hidden;
 }
 
 .leftSideWrapper {

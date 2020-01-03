@@ -20,9 +20,11 @@ export default class Constraint extends Component {
     }
 
     componentDidUpdate() {
-        if (this.state.color !== this.updateColor()) {
+        if (this.state.style.color !== this.updateColor()) {
+            let style = JSON.parse(JSON.stringify(this.state.style))
+            style["color"] = this.updateColor()
             this.setState({
-                color: this.updateColor()
+                style: style
             })
         }
     }
