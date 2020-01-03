@@ -17,7 +17,8 @@ export default class Page extends Component {
             submit: false,
             popupIndices: [-1, -1],
             exitPopup: false,
-            animation: false
+            animation: false,
+            solver: "DFS"
         }
         this.getFormValue = this.getFormValue.bind(this)
         this.getGridState = this.getGridState.bind(this)
@@ -27,6 +28,7 @@ export default class Page extends Component {
         this.getPopupIndices = this.getPopupIndices.bind(this)
         this.clickHandler = this.clickHandler.bind(this)
         this.animationToggle = this.animationToggle.bind(this)
+        this.solverToggle = this.solverToggle.bind(this)
     }
 
     getFormValue = (name, value) => {
@@ -45,6 +47,7 @@ export default class Page extends Component {
             h: this.state.rows,
             x: gridState.col_constraint,
             y: gridState.row_constraint,
+            solver: this.state.solver,
             animation: this.state.animation
         }
         this.setState({
@@ -109,6 +112,19 @@ export default class Page extends Component {
         })
     }
 
+    solverToggle() {
+        if (this.state.solver === "DFS") {
+            this.setState({
+                solver: "heuristic"
+            })
+        }
+        if (this.state.solver === "heuristic") {
+            this.setState({
+                solver: "DFS"
+            })
+        }
+    }
+
     render() {
         return (
             <div className="page" onClick={this.clickHandler}>
@@ -123,6 +139,9 @@ export default class Page extends Component {
                         <div className="submissionWrapper">
                             <div class="input-group-append">
                                 <button onClick={this.animationToggle} class="btn btn-outline-secondary" type="button" id="button-addon2">Animation: {this.state.animation === true ? "On" : "Off"}</button>
+                            </div>
+                            <div class="input-group-append">
+                                <button onClick={this.solverToggle} class="btn btn-outline-secondary" type="button" id="button-addon2">Solver: {this.state.solver}</button>
                             </div>
                             <input type="submit" value="Solve Puzzle!" className="btn btn-warning" onClick={this.submit} />
                         </div>

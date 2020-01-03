@@ -284,7 +284,8 @@ export default class Grid extends Component {
                         "border-left": "1px dashed gray",
                         "border-right": "",
                         "border-bottom": "none",
-                        "background-color": "white"
+                        "background-color": "white",
+                        "color": "white"
                     }
 
                     if ((i - this.state.row_constraint_len) % 5 === 0) {
@@ -313,7 +314,12 @@ export default class Grid extends Component {
                         style["border-top"] = 0
                         style["border-left"] = 0
 
-                        return <div className="gridSquare" style={style}> </div>
+                        if (element === "X") {
+                            return <div className="gridSquare" style={style} value="X"> </div>
+                        }
+                        else {
+                            return <div className="gridSquare" style={style}> </div>
+                        }
                     }
                 })
             }</div>
