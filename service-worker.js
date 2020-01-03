@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/picross_solver_frontend/precache-manifest.415b4c6510495178b22da72dd90ecec1.js"
+  "/picross_solver_frontend/precache-manifest.2646d377e30392512be38628fc20ade3.js"
 );
 
 self.addEventListener('message', (event) => {
