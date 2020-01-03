@@ -63,6 +63,7 @@ export default class Page extends Component {
             url: url,
             data: this.state.request_body
         }).then((response) => {
+            console.log(response)
             this.setState({
                 response: response.data,
                 submit: false

@@ -319,8 +319,7 @@ export default class Grid extends Component {
                         style["border-left"] = 0
                         return <div className="gridSquare" style={style}> </div>
                     }
-                }
-        })
+                })
             }</div>
         })
     }
