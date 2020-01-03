@@ -10,8 +10,8 @@ export default class Page extends Component {
         super(props)
 
         this.state = {
-            rows: 24,
-            cols: 24,
+            rows: 15,
+            cols: 15,
             request_body: null,
             response: null,
             submit: false,
