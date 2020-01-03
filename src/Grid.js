@@ -5,18 +5,31 @@ import "./Grid.css"
 export default class Grid extends Component {
     constructor(props) {
         super(props)
+        const duck = {
+            row_constraint_len: 4,
+            col_constraint_len: 3,
+            row_constraint: [[3], [5], [3, 4], [7], [5], [3], [5], [8, 1], [3, 3, 3], [2, 3, 7], [2, 4, 5], [2, 8], [10], [3, 2], [6]],
+            col_constraint: [[1], [2, 4], [4, 6], [2, 6, 2, 1], [8, 2, 1, 1], [8, 2, 3], [4, 2, 6], [2, 2, 5], [3, 2, 1], [6], [5], [4], [5], [4], [3]],
+        }
+        const crab = {
+            row_constraint_len: 5,
+            col_constraint_len: 6,
+            row_constraint: [[2, 3], [1, 2, 2], [2, 2, 2, 5], [2, 1, 2, 3], [2, 1, 1, 1], [2, 2, 4], [3, 10], [6, 8], [4, 11], [2, 1, 9], [2, 1, 1, 10], [2, 1, 12], [1, 12], [1, 1, 11], [2, 9], [3, 2, 10], [11, 1, 1, 3], [7, 1, 1, 1, 2], [2, 1, 1, 1], [1, 1, 1, 2], [1, 1, 2, 2, 1], [2, 2, 2, 3], [3, 2, 2], [1]],
+            col_constraint: [[1], [2], [3], [4, 2, 2], [6, 4], [3, 3], [6, 2], [2, 2], [2, 1, 1, 1, 2], [4, 2, 2, 2], [1, 2, 1, 4, 2], [1, 1, 9, 4], [14, 2, 2], [2, 12, 2, 1], [2, 1, 10, 2, 3], [1, 15, 1], [2, 11, 4, 1], [2, 14, 3], [1, 2, 15, 1], [1, 2, 9, 2, 2, 1], [1, 3, 3], [1, 1], [1, 1], [1]]
+        }
+
+        let image = crab
 
         this.state = {
             grid: [],
             popupIndices: [-1, -1],
-            row_constraint_len: 4,
-            col_constraint_len: 3,
-            // row_constraint: [[3], [5], [4, 3], [7], [5], [3], [5], [1, 8], [3, 3, 3], [7, 3, 2], [5, 4, 2], [8, 2], [10], [2, 3], [6]],
-            // col_constraint: [[3], [4], [5], [4], [5], [6], [3, 2, 1], [2, 2, 5], [4, 2, 6], [8, 2, 3], [8, 2, 1, 1], [2, 6, 2, 1], [4, 6], [2, 4], [1]],
-            row_constraint: [[3], [5], [3, 4], [7], [5], [3], [5], [8, 1], [3, 3, 3], [2, 3, 7], [2, 4, 5], [2, 8], [10], [3, 2], [6]],
-            col_constraint: [[1], [2, 4], [4, 6], [2, 6, 2, 1], [8, 2, 1, 1], [8, 2, 3], [4, 2, 6], [2, 2, 5], [3, 2, 1], [6], [5], [4], [5], [4], [3]],
             solution: null
         }
+
+        this.state["row_constraint_len"] = image["row_constraint_len"]
+        this.state["col_constraint_len"] = image["col_constraint_len"]
+        this.state["row_constraint"] = image["row_constraint"]
+        this.state["col_constraint"] = image["col_constraint"]
         // let [row_constraint, col_constraint] = this.constructConstraints()
         // this.state.row_constraint = row_constraint
         // this.state.col_constraint = col_constraint
