@@ -309,19 +309,20 @@ export default class Grid extends Component {
                         return <div className="gridSquare" style={style}> </div>
                     }
 
+                    if (element === "X") {
+                        return <div className="gridSquare" style={style} value="X"> </div>
+                    }
+
                     else {
                         style["background-color"] = "black"
                         style["border-top"] = 0
                         style["border-left"] = 0
 
-                        if (element === "X") {
-                            return <div className="gridSquare" style={style} value="X"> </div>
-                        }
                         else {
                             return <div className="gridSquare" style={style}> </div>
-                        }
-                    }
-                })
+                }
+            }
+        })
             }</div>
         })
     }
