@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import RowColForm from './RowColForm'
 import Grid from './Grid.js'
 import "./Page.css"
@@ -9,11 +10,23 @@ export default class Page extends Component {
         super(props)
 
         this.state = {
-            rows: 4,
-            cols: 4
+            rows: 15,
+            cols: 15,
+            request_body: null,
+            response: null,
+            submit: false,
+            popupIndices: [-1, -1],
+            exitPopup: false,
+            animation: false
         }
         this.getFormValue = this.getFormValue.bind(this)
-        this.update = this.update.bind(this)
+        this.getGridState = this.getGridState.bind(this)
+        this.getData = this.getData.bind(this)
+        this.updateGrid = this.updateGrid.bind(this)
+        this.submit = this.submit.bind(this)
+        this.getPopupIndices = this.getPopupIndices.bind(this)
+        this.clickHandler = this.clickHandler.bind(this)
+        this.animationToggle = this.animationToggle.bind(this)
     }
 
     getFormValue = (name, value) => {
@@ -24,17 +37,101 @@ export default class Page extends Component {
         }
     }
 
-    update() {
-        console.log("parent updating")
-        this.forceUpdate()
+
+    getGridState(state) {
+        const gridState = state
+        const request_body = {
+            w: this.state.cols,
+            h: this.state.rows,
+            x: gridState.col_constraint,
+            y: gridState.row_constraint,
+            animation: this.state.animation
+        }
+        this.setState({
+            request_body: request_body
+        }, () => this.getData())
+    }
+
+    getData() {
+        // const url = "http://127.0.0.1:5000"
+        const url = "http://picross-solver.herokuapp.com"
+        console.log("posting to: " + url)
+        axios({
+            method: 'post',
+            url: url,
+            data: this.state.request_body
+        }).then((response) => {
+            this.setState({
+                response: response.data,
+                submit: false
+            })
+        })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    updateGrid() {
+        return this.state.response
+    }
+
+    submit() {
+        this.setState({
+            submit: true
+        })
+    }
+
+    getPopupIndices(val) {
+        this.setState({
+            popupIndices: val,
+            exitPopup: true
+        })
+    }
+
+    clickHandler(event) {
+        if (this.state.popupIndices[0] !== -1 && this.state.popupIndices[1] !== -1) {
+            if (this.state.exitPopup === false) {
+                this.setState({
+                    exitPopup: true
+                })
+            }
+            else {
+                this.setState({
+                    popupIndices: [-1, -1],
+                    exitPopup: false
+                })
+            }
+        }
+    }
+
+    animationToggle() {
+        this.setState({
+            animation: !this.state.animation
+        })
     }
 
     render() {
         return (
-            <div className="page">
-                <RowColForm name="Number of Rows (Max 25)" id="rows" passValue={this.getFormValue} />
-                <RowColForm name="Number of Cols (Max 25)" id="cols" passValue={this.getFormValue} />
-                <Grid rows={this.state.rows} cols={this.state.cols} updateParent={this.update} />
+            <div className="page" onClick={this.clickHandler}>
+                <h1 className="display-4 header">Picross Solver</h1>
+                <p className="h4">Click on the rows and columns to add and remove constraints</p>
+                <div className="contentWrapper">
+                    <div className="leftSideWrapper">
+                        <div className="rowColWrapper">
+                            <RowColForm name="Number of Rows (Max 25)" id="rows" passValue={this.getFormValue} />
+                            <RowColForm name="Number of Cols (Max 25)" id="cols" passValue={this.getFormValue} />
+                        </div>
+                        <div className="submissionWrapper">
+                            <div class="input-group-append">
+                                <button onClick={this.animationToggle} class="btn btn-outline-secondary" type="button" id="button-addon2">Animation: {this.state.animation === true ? "On" : "Off"}</button>
+                            </div>
+                            <input type="submit" value="Solve Puzzle!" className="btn btn-warning" onClick={this.submit} />
+                        </div>
+                    </div>
+                    <Grid rows={this.state.rows} cols={this.state.cols} passState={this.getGridState} grid={this.state.response}
+                        submit={this.state.submit} popupIndices={this.state.popupIndices} passPopupIndices={this.getPopupIndices}
+                        animation={this.state.animation} />
+                </div>
             </div>
         )
     }

@@ -1,15 +1,22 @@
 import React, { Component, useRef } from 'react'
+import "./Popup.css"
 
 export default class Popup extends Component {
     constructor(props) {
         super(props)
 
+        const left_offset = -410 + 20*(18 - this.props.cols - this.props.rowConstraint) 
+
         this.state = {
             text: "",
             value: [],
             axis: "",
-            valid: true
+            valid: true,
+            buttonText: "Press Enter to Submit",
+            left_offset: left_offset
         }
+
+        
 
         this.getText = this.getText.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -24,7 +31,8 @@ export default class Popup extends Component {
 
     getText() {
         let text
-        if (this.props.row === 0) {
+
+        if (this.props.row < this.props.rowConstraint) {
             text = "col " + (this.props.col - this.props.colConstraint)
             this.setState({ axis: "cols" })
         }
@@ -42,6 +50,7 @@ export default class Popup extends Component {
     }
 
     onKeyDown = (event) => {
+        console.log(event.key)
         // 'keypress' event misbehaves on mobile so we track 'Enter' key via 'keydown' event
         if (event.key === 'Enter') {
             event.preventDefault();
@@ -63,23 +72,31 @@ export default class Popup extends Component {
         })
         const axis = this.state.axis
         if (constraint_block_total <= this.props[axis]) {
-            this.setState({ valid: true })
+            this.setState({
+                valid: true,
+                buttonText: "Press Enter to Submit",
+            })
             //submit value
             this.props.passVal(this.state.value, this.state.axis)
         }
         else {
-            this.setState({ valid: false })
+            this.setState({
+                valid: false,
+                buttonText: "Invalid Entry"
+            })
         }
         event.preventDefault();
     }
 
     render() {
         return (
-            <div className="popup" onKeyDown={this.onKeyDown}>
-                {this.state.text}
-                <input type="text" ref={(input) => { this.nameInput = input; }} value={this.props.value} onChange={this.handleChange} />
-                <input type="submit" value="Submit" onClick={this.handleSubmit} />
-                {this.state.valid ? <div></div> : <div>invalid constraint</div>}
+            <div className="popup" onKeyDown={this.onKeyDown} style={{"left": this.state.left_offset}}>
+
+                <div className="input-group mb-3" onSubmit={this.handleSubmit}>
+                    <span className="input-group-addon addon-small">{this.state.text}</span>
+                    <input type="text" className="form-control" ref={(input) => { this.nameInput = input; }} value={this.props.value} onChange={this.handleChange} />
+                </div>
+                <input type="submit" value={this.state.buttonText} className="btn btn-danger btn-small" onClick={this.handleSubmit} />
             </div>
         )
     }

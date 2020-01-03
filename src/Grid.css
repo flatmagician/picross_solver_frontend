@@ -2,16 +2,33 @@
     display: flex;
     flex-direction: column;
     width: min-content;
-    border: 1px solid black;
+    /* border: .5px solid black; */
+    border-radius: 3px;
+    border-bottom: 2px solid black;
 }
 
 .gridRow {
     display: flex;
     flex-direction: row;
+    /* border-left: 1px solid black; */
+    border-right: 2px solid black;
 }
 
 .gridSquare {
-    border: 1px solid black;
     width: 20px;
     height: 20px;
+    color: rgb(85, 85, 85);
+}
+
+.unused {
+    background-color: rgb(106, 182, 180);
+    border: none;
+    /* border-left: rgb(106, 182, 180); */
+    /* border: 2px solid; */
+}
+
+
+
+.btn {
+    margin-top: 20px;
 }

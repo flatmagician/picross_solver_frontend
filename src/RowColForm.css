@@ -1,0 +1,22 @@
+.rowColForm {
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    margin-bottom: 20px !important;
+}
+
+.input-group-addon {
+    width: 200px !important;
+
+}
+
+.input-group {
+    border: 2px solid rgb(50, 50, 50);
+    border-radius: 6px;
+}
+
+.btn {
+    border: 2px solid rgb(50, 50, 50) !important;
+    border-radius: 6px !important;
+    color: rgb(50, 50, 50) !important
+}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import "./RowColForm.css"
 
 export default class RowColForm extends React.Component {
     constructor(props) {
@@ -16,12 +17,12 @@ export default class RowColForm extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <label>
-                    {this.props.name}
-                    <input type="text" value={this.state.value} onChange={this.handleChange} />
-                </label>
-            </form>
+            <div className="rowColForm">
+                <div className="input-group mb-3" onSubmit={this.handleSubmit}>
+                    <span className="input-group-addon" id="basic-addon3">{this.props.name}</span>
+                    <input type="text" className="form-control" value={this.state.value} onChange={this.handleChange} />
+                </div>
+            </div>
         );
     }
 }

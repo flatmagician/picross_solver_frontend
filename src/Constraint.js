@@ -8,11 +8,33 @@ export default class Constraint extends Component {
 
         this.state = {
             value: [],
+            style: []
         }
+        this.state.style = this.props.style
+        this.state.style["color"] = this.updateColor()
+
+        this.updateColor = this.updateColor.bind(this)
         this.onClick = this.onClick.bind(this)
         this.getPopupVal = this.getPopupVal.bind(this)
         this.closePopup = this.closePopup.bind(this)
     }
+
+    componentDidUpdate() {
+        if (this.state.color !== this.updateColor()) {
+            this.setState({
+                color: this.updateColor()
+            })
+        }
+    }
+
+    updateColor() {
+        let color = "rgb(155,155,155)"
+        if (this.props.value !== "X") {
+            color = "black"
+        }
+        return color
+    }
+
 
     onClick() {
         if (this.props.showPopup) {
@@ -48,7 +70,7 @@ export default class Constraint extends Component {
     render() {
         return (
             <span className="constraintWrapper">
-                <div className="gridSquare constraint" style={{ "background-color": "gray", "color": "black" }} onClick={this.onClick}>
+                <div className="gridSquare constraint" onClick={this.onClick} style={this.state.style}>
                     {this.props.value}
                 </div>
                 <span>
