@@ -171,11 +171,11 @@ export default class Grid extends Component {
         const col_constraint_len = this.state.col_constraint_len
 
 
-        let grid = new Array(this.props.rows + row_constraint_len)
+        let grid = new Array(rows + row_constraint_len)
         //form empty grid of 0s
-        for (let i = 0; i < this.props.rows + row_constraint_len; i++) {
-            let row = new Array(this.props.cols + col_constraint_len)
-            for (let j = 0; j < this.props.cols + col_constraint_len; j++) {
+        for (let i = 0; i < rows + row_constraint_len; i++) {
+            let row = new Array(cols + col_constraint_len)
+            for (let j = 0; j < cols + col_constraint_len; j++) {
                 row[j] = 0
             }
             grid[i] = row
