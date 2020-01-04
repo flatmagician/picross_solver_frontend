@@ -19,7 +19,15 @@ export default class Constraint extends Component {
         this.closePopup = this.closePopup.bind(this)
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.style !== this.props.style) {
+            let style = this.props.style
+            style["color"] = this.updateColor()
+            this.setState({
+                style: style
+            })
+
+        }
         if (this.state.style.color !== this.updateColor()) {
             let style = JSON.parse(JSON.stringify(this.state.style))
             style["color"] = this.updateColor()

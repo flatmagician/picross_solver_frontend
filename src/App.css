@@ -2,9 +2,14 @@
   text-align: center;
   /* color: white; */
   background-color: rgb(106, 182, 180);
-  height: 100vh;
-  min-height: min-content;
-  width: 100vw;
+  width: max-content;
+  height: max-content;
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
 }
 
 .App-logo {

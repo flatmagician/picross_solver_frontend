@@ -2,9 +2,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100vw;
+    width: max-content;
+    height: max-content;
     background-color: #6ab6b4;
-    overflow: hidden;
 }
 
 .leftSideWrapper {

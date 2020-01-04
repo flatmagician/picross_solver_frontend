@@ -18,7 +18,8 @@ export default class Page extends Component {
             popupIndices: [-1, -1],
             exitPopup: false,
             animation: false,
-            solver: "DFS"
+            solver: "DFS",
+            image: "Duck"
         }
         this.getFormValue = this.getFormValue.bind(this)
         this.getGridState = this.getGridState.bind(this)
@@ -29,6 +30,7 @@ export default class Page extends Component {
         this.clickHandler = this.clickHandler.bind(this)
         this.animationToggle = this.animationToggle.bind(this)
         this.solverToggle = this.solverToggle.bind(this)
+        this.imageToggle = this.imageToggle.bind(this)
     }
 
     getFormValue = (name, value) => {
@@ -63,7 +65,12 @@ export default class Page extends Component {
             url: url,
             data: this.state.request_body
         }).then((response) => {
-            console.log(response)
+            let data = response.data
+            console.log(data)
+            if (typeof data === "string") {
+                data = JSON.parse(data)
+            }
+
             this.setState({
                 response: response.data,
                 submit: false
@@ -126,6 +133,23 @@ export default class Page extends Component {
         }
     }
 
+    imageToggle() {
+        if (this.state.image === "Duck") {
+            this.setState({
+                image: "Crab",
+                rows: 24,
+                cols: 24
+            })
+        }
+        if (this.state.image === "Crab") {
+            this.setState({
+                image: "Duck",
+                rows: 15,
+                cols: 15
+            })
+        }
+    }
+
     render() {
         return (
             <div className="page" onClick={this.clickHandler}>
@@ -138,18 +162,23 @@ export default class Page extends Component {
                             <RowColForm name="Number of Cols (Max 25)" id="cols" passValue={this.getFormValue} />
                         </div>
                         <div className="submissionWrapper">
-                            <div class="input-group-append">
-                                <button onClick={this.animationToggle} class="btn btn-outline-secondary" type="button" id="button-addon2">Animation: {this.state.animation === true ? "On" : "Off"}</button>
+                            <div className="input-group-append">
+                                <button onClick={this.imageToggle} className="btn btn-outline-secondary" type="button" id="button-addon2">Image: {this.state.image}</button>
                             </div>
-                            <div class="input-group-append">
-                                <button onClick={this.solverToggle} class="btn btn-outline-secondary" type="button" id="button-addon2">Solver: {this.state.solver}</button>
+                        </div>
+                        <div className="submissionWrapper">
+                            <div className="input-group-append">
+                                <button onClick={this.animationToggle} className="btn btn-outline-secondary" type="button" id="button-addon2">Animation: {this.state.animation === true ? "On" : "Off"}</button>
+                            </div>
+                            <div className="input-group-append">
+                                <button onClick={this.solverToggle} className="btn btn-outline-secondary" type="button" id="button-addon2">Solver: {this.state.solver}</button>
                             </div>
                             <input type="submit" value="Solve Puzzle!" className="btn btn-warning" onClick={this.submit} />
                         </div>
                     </div>
                     <Grid rows={this.state.rows} cols={this.state.cols} passState={this.getGridState} grid={this.state.response}
                         submit={this.state.submit} popupIndices={this.state.popupIndices} passPopupIndices={this.getPopupIndices}
-                        animation={this.state.animation} />
+                        animation={this.state.animation} image={this.state.image} />
                 </div>
             </div>
         )

@@ -5,31 +5,31 @@ import "./Grid.css"
 export default class Grid extends Component {
     constructor(props) {
         super(props)
-        const duck = {
-            row_constraint_len: 4,
-            col_constraint_len: 3,
-            row_constraint: [[3], [5], [3, 4], [7], [5], [3], [5], [8, 1], [3, 3, 3], [2, 3, 7], [2, 4, 5], [2, 8], [10], [3, 2], [6]],
-            col_constraint: [[1], [2, 4], [4, 6], [2, 6, 2, 1], [8, 2, 1, 1], [8, 2, 3], [4, 2, 6], [2, 2, 5], [3, 2, 1], [6], [5], [4], [5], [4], [3]],
-        }
-        const crab = {
-            row_constraint_len: 5,
-            col_constraint_len: 6,
-            row_constraint: [[2, 3], [1, 2, 2], [2, 2, 2, 5], [2, 1, 2, 3], [2, 1, 1, 1], [2, 2, 4], [3, 10], [6, 8], [4, 11], [2, 1, 9], [2, 1, 1, 10], [2, 1, 12], [1, 12], [1, 1, 11], [2, 9], [3, 2, 10], [11, 1, 1, 3], [7, 1, 1, 1, 2], [2, 1, 1, 1], [1, 1, 1, 2], [1, 1, 2, 2, 1], [2, 2, 2, 3], [3, 2, 2], [1]],
-            col_constraint: [[1], [2], [3], [4, 2, 2], [6, 4], [3, 3], [6, 2], [2, 2], [2, 1, 1, 1, 2], [4, 2, 2, 2], [1, 2, 1, 4, 2], [1, 1, 9, 4], [14, 2, 2], [2, 12, 2, 1], [2, 1, 10, 2, 3], [1, 15, 1], [2, 11, 4, 1], [2, 14, 3], [1, 2, 15, 1], [1, 2, 9, 2, 2, 1], [1, 3, 3], [1, 1], [1, 1], [1]]
-        }
-
-        let image = duck
 
         this.state = {
             grid: [],
             popupIndices: [-1, -1],
-            solution: null
+            solution: null,
+            images: {
+                Duck: {
+                    row_constraint_len: 4,
+                    col_constraint_len: 3,
+                    row_constraint: [[3], [5], [3, 4], [7], [5], [3], [5], [8, 1], [3, 3, 3], [2, 3, 7], [2, 4, 5], [2, 8], [10], [3, 2], [6]],
+                    col_constraint: [[1], [2, 4], [4, 6], [2, 6, 2, 1], [8, 2, 1, 1], [8, 2, 3], [4, 2, 6], [2, 2, 5], [3, 2, 1], [6], [5], [4], [5], [4], [3]],
+                },
+                Crab: {
+                    row_constraint_len: 5,
+                    col_constraint_len: 6,
+                    col_constraint: [[2, 3], [1, 2, 2], [2, 2, 2, 5], [2, 1, 2, 3], [2, 1, 1, 1], [2, 2, 4], [3, 10], [6, 8], [4, 11], [2, 1, 9], [2, 1, 1, 10], [2, 1, 12], [1, 12], [1, 1, 11], [2, 9], [3, 2, 10], [11, 1, 1, 3], [7, 1, 1, 1, 2], [2, 1, 1, 1], [1, 1, 1, 2], [1, 1, 2, 2, 1], [2, 2, 2, 3], [3, 2, 2], [1]],
+                    row_constraint: [[1], [2], [3], [4, 2, 2], [6, 4], [3, 3], [6, 2], [2, 2], [2, 1, 1, 1, 2], [4, 2, 2, 2], [1, 2, 1, 4, 2], [1, 1, 9, 4], [14, 2, 2], [2, 12, 2, 1], [2, 1, 10, 2, 3], [1, 15, 1], [2, 11, 4, 1], [2, 14, 3], [1, 2, 15, 1], [1, 2, 9, 2, 2, 1], [1, 3, 3], [1, 1], [1, 1], [1]]
+                }
+            }
         }
 
-        this.state["row_constraint_len"] = image["row_constraint_len"]
-        this.state["col_constraint_len"] = image["col_constraint_len"]
-        this.state["row_constraint"] = image["row_constraint"]
-        this.state["col_constraint"] = image["col_constraint"]
+        this.state["row_constraint_len"] = this.state.images[this.props.image]["row_constraint_len"]
+        this.state["col_constraint_len"] = this.state.images[this.props.image]["col_constraint_len"]
+        this.state["row_constraint"] = this.state.images[this.props.image]["row_constraint"]
+        this.state["col_constraint"] = this.state.images[this.props.image]["col_constraint"]
         // let [row_constraint, col_constraint] = this.constructConstraints()
         // this.state.row_constraint = row_constraint
         // this.state.col_constraint = col_constraint
@@ -54,6 +54,16 @@ export default class Grid extends Component {
                 popupIndices: [-1, -1]
             })
         }
+        else if (prevProps.image !== this.props.image) {
+            this.setState({
+                row_constraint_len: this.state.images[this.props.image]["row_constraint_len"],
+                col_constraint_len: this.state.images[this.props.image]["col_constraint_len"],
+                row_constraint: this.state.images[this.props.image]["row_constraint"],
+                col_constraint: this.state.images[this.props.image]["col_constraint"],
+            }, () => this.setState({
+                grid: this.constructGrid()
+            }))
+        }
         else if (prevProps.rows !== this.props.rows || prevProps.cols !== this.props.cols) {
             let [row_constraint, col_constraint] = this.constructConstraints()
             this.setState({
@@ -66,12 +76,12 @@ export default class Grid extends Component {
             }))
         }
         else if (prevState.row_constraint_len !== this.state.row_constraint_len || prevState.col_constraint_len !== this.state.col_constraint_len) {
-
             let grid = this.constructGrid()
             this.setState({
                 grid: grid
             })
         }
+
         else if (prevProps.grid !== this.props.grid) {
             if (this.props.animation === false) {
                 this.populateGrid(this.props.grid)
@@ -109,7 +119,7 @@ export default class Grid extends Component {
                     else {
                         const grid = display_grids[j]
                         this.populateGrid(grid)
-                        j += 3
+                        j += 1
                     }
                 }, 20)
                 // }                      
@@ -285,7 +295,7 @@ export default class Grid extends Component {
                         "border-right": "",
                         "border-bottom": "none",
                         "background-color": "white",
-                        "color": "white"
+                        "color": "black"
                     }
 
                     if ((i - this.state.row_constraint_len) % 5 === 0) {
@@ -309,8 +319,8 @@ export default class Grid extends Component {
                         return <div className="gridSquare" style={style}> </div>
                     }
 
-                    else if (element === "X") {
-                        return <div className="gridSquare" style={style} value="X"> </div>
+                    else if (element === -2) {
+                        return <div className="gridSquare" style={style}>X</div>
                     }
 
                     else {
