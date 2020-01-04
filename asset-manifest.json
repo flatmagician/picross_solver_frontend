@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/picross_solver_frontend/static/css/main.b5b165ed.chunk.css",
-    "main.js": "/picross_solver_frontend/static/js/main.e40dd21b.chunk.js",
-    "main.js.map": "/picross_solver_frontend/static/js/main.e40dd21b.chunk.js.map",
+    "main.js": "/picross_solver_frontend/static/js/main.ced12b57.chunk.js",
+    "main.js.map": "/picross_solver_frontend/static/js/main.ced12b57.chunk.js.map",
     "runtime-main.js": "/picross_solver_frontend/static/js/runtime-main.0e9468ed.js",
     "runtime-main.js.map": "/picross_solver_frontend/static/js/runtime-main.0e9468ed.js.map",
     "static/js/2.9c0d34f1.chunk.js": "/picross_solver_frontend/static/js/2.9c0d34f1.chunk.js",
     "static/js/2.9c0d34f1.chunk.js.map": "/picross_solver_frontend/static/js/2.9c0d34f1.chunk.js.map",
     "index.html": "/picross_solver_frontend/index.html",
-    "precache-manifest.ed63c06a1fb2d1244367724957cf4248.js": "/picross_solver_frontend/precache-manifest.ed63c06a1fb2d1244367724957cf4248.js",
+    "precache-manifest.39e97e5991a7e821f299921c27a21271.js": "/picross_solver_frontend/precache-manifest.39e97e5991a7e821f299921c27a21271.js",
     "service-worker.js": "/picross_solver_frontend/service-worker.js",
     "static/css/main.b5b165ed.chunk.css.map": "/picross_solver_frontend/static/css/main.b5b165ed.chunk.css.map",
     "static/js/2.9c0d34f1.chunk.js.LICENSE": "/picross_solver_frontend/static/js/2.9c0d34f1.chunk.js.LICENSE"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.0e9468ed.js",
     "static/js/2.9c0d34f1.chunk.js",
     "static/css/main.b5b165ed.chunk.css",
-    "static/js/main.e40dd21b.chunk.js"
+    "static/js/main.ced12b57.chunk.js"
   ]
 }
