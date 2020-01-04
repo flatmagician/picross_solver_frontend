@@ -66,7 +66,6 @@ export default class Page extends Component {
             data: this.state.request_body
         }).then((response) => {
             let data = response.data
-            console.log(data)
             if (typeof data === "string") {
                 data = JSON.parse(data)
             }
