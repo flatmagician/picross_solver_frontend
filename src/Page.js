@@ -19,7 +19,10 @@ export default class Page extends Component {
             exitPopup: false,
             animation: false,
             solver: "DFS",
-            image: "Duck"
+            image: "Duck",
+            border_val: "1px dashed gray",
+            show_border: true,
+            excluded_val: "X"
         }
         this.getFormValue = this.getFormValue.bind(this)
         this.getGridState = this.getGridState.bind(this)
@@ -31,12 +34,15 @@ export default class Page extends Component {
         this.animationToggle = this.animationToggle.bind(this)
         this.solverToggle = this.solverToggle.bind(this)
         this.imageToggle = this.imageToggle.bind(this)
+        this.borderToggle = this.borderToggle.bind(this)
+        this.excludedValToggle = this.excludedValToggle.bind(this)
     }
 
     getFormValue = (name, value) => {
         let newState = this.state
-        if (Number.isInteger(+value) && value > 0 && value < 26) {
+        if (Number.isInteger(+value) && +value > 0 && +value < 26) {
             newState[name] = value
+            newState["image"] = "None"
             this.setState(newState)
         }
     }
@@ -133,6 +139,13 @@ export default class Page extends Component {
     }
 
     imageToggle() {
+        if (this.state.image === "None") {
+            this.setState({
+                image: "Duck",
+                rows: 15,
+                cols: 15
+            })
+        }
         if (this.state.image === "Duck") {
             this.setState({
                 image: "Camera",
@@ -177,6 +190,33 @@ export default class Page extends Component {
         }
     }
 
+    borderToggle() {
+        if (this.state.border_val === "1px dashed gray")
+            this.setState({
+                show_border: !this.state.show_border,
+                border_val: "0px"
+            })
+        else {
+            this.setState({
+                show_border: !this.state.show_border,
+                border_val: "1px dashed gray"
+            })
+        }
+    }
+
+    excludedValToggle() {
+        if (this.state.excluded_val === "X") {
+            this.setState({
+                excluded_val: ""
+            })
+        }
+        else {
+            this.setState({
+                excluded_val: "X"
+            })
+        }
+    }
+
     render() {
         return (
             <div className="page" onClick={this.clickHandler}>
@@ -185,14 +225,25 @@ export default class Page extends Component {
                 <div className="contentWrapper">
                     <div className="leftSideWrapper">
                         <div className="rowColWrapper">
-                            <RowColForm name="Number of Rows (Max 25)" id="rows" passValue={this.getFormValue} />
-                            <RowColForm name="Number of Cols (Max 25)" id="cols" passValue={this.getFormValue} />
+                            <RowColForm name="Number of Rows (Max 25)" id="rows" passValue={this.getFormValue} val={this.state.rows} />
+                            <RowColForm name="Number of Cols (Max 25)" id="cols" passValue={this.getFormValue} val={this.state.cols} />
                         </div>
+                        <h5 className="settings">Display Settings:</h5>
                         <div className="submissionWrapper">
                             <div className="input-group-append">
-                                <button onClick={this.imageToggle} className="btn btn-outline-secondary" type="button" id="button-addon2">Image: {this.state.image}</button>
+                                <button onClick={this.excludedValToggle} className="btn btn-outline-secondary" type="button" id="button-addon2">Highlight Excluded Cells: {this.state.excluded_val === "X" ? "On" : "Off"}</button>
+                            </div>
+                            <div className="input-group-append">
+                                <button onClick={this.borderToggle} className="btn btn-outline-secondary" type="button" id="button-addon2">Borders: {this.state.show_border ? "On" : "Off"}</button>
                             </div>
                         </div>
+                        <h5 className="settings">Image Preset Setting:</h5>
+                        <div className="submissionWrapper">
+                            <div className="input-group-append">
+                                <button onClick={this.imageToggle} className="btn btn-outline-secondary" type="button" id="button-addon2">Preset Image: {this.state.image}</button>
+                            </div>
+                        </div>
+                        <h5 className="settings">Solver Settings:</h5>
                         <div className="submissionWrapper">
                             <div className="input-group-append">
                                 <button onClick={this.animationToggle} className="btn btn-outline-secondary" type="button" id="button-addon2">Animation: {this.state.animation === true ? "On" : "Off"}</button>
@@ -205,7 +256,7 @@ export default class Page extends Component {
                     </div>
                     <Grid rows={this.state.rows} cols={this.state.cols} passState={this.getGridState} grid={this.state.response}
                         submit={this.state.submit} popupIndices={this.state.popupIndices} passPopupIndices={this.getPopupIndices}
-                        animation={this.state.animation} image={this.state.image} />
+                        animation={this.state.animation} image={this.state.image} border_val={this.state.border_val} show_border={this.state.show_border} excluded_val={this.state.excluded_val} />
                 </div>
             </div>
         )

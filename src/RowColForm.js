@@ -4,9 +4,18 @@ import "./RowColForm.css"
 export default class RowColForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { value: '' };
+        this.state = { value: this.props.val };
 
         this.handleChange = this.handleChange.bind(this);
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.val !== this.props.val) {
+            if (this.props.val !== this.state.value)
+                this.setState({
+                    value: this.props.val
+                })
+        }
     }
 
     handleChange(event) {

@@ -17,7 +17,6 @@
 }
 
 .rowColWrapper {
-    margin-left: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -35,7 +34,7 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 .header {
@@ -49,4 +48,10 @@
 
 .btn-warning {
     background-color: rgb(252, 233, 177) !important
+}
+
+.settings {
+    /* margin: 0 !important; */
+    align-self: flex-start;
+    margin-left: 5px
 }

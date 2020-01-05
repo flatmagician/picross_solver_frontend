@@ -42,8 +42,8 @@ export default class Grid extends Component {
                     row_constraint: [[1, 1, 8], [1, 1, 1], [1, 1, 1, 1, 1, 1, 1], [1, 2, 1, 1], [1, 1, 1, 1], [6], [4], [4], [2, 2], [15], [13, 3], [1, 2, 2, 2], [4, 5, 4], [4, 4, 2, 4], [4, 5, 1, 4], [4, 7, 4], [4, 7, 4], [4, 5, 4], [5, 5], [15]]
                 },
                 Teapot: {
-                    row_constraint_len: 4,
-                    col_constraint_len: 6,
+                    row_constraint_len: 6,
+                    col_constraint_len: 4,
                     col_constraint: [[2, 1, 2], [1, 2, 1, 2, 2, 1], [2, 1, 2, 3], [1, 1, 1, 1, 3, 3], [1, 1, 1, 1, 2], [3, 3, 1, 1], [2, 2, 1, 1, 1], [1, 1, 1, 1, 1, 1], [2, 2, 1, 1, 1, 1], [2, 1, 1, 1, 1], [1, 2, 1, 2, 2, 1], [2, 1, 3, 3, 1], [1, 1, 9, 1], [2, 9, 1], [10, 2], [6, 3], [2, 1, 4], [2, 2, 4], [5, 4], [3, 4]],
                     row_constraint: [[1, 4, 1], [3, 1], [1, 1, 1], [1, 1], [3, 4], [1, 6], [1, 1], [2, 10], [1, 1, 1, 1], [1, 12, 3], [1, 10], [1, 5, 2], [1, 4, 2], [1, 4, 2], [1, 6], [1, 5], [3, 1, 5, 4], [3, 9, 5], [1, 3, 6], [2, 17]]
                 }
@@ -70,6 +70,7 @@ export default class Grid extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log(prevProps, this.props)
         if (prevProps.submit !== this.props.submit && this.props.submit === true) {
             this.passState()
         }
@@ -79,14 +80,28 @@ export default class Grid extends Component {
             })
         }
         else if (prevProps.image !== this.props.image) {
-            this.setState({
-                row_constraint_len: this.state.images[this.props.image]["row_constraint_len"],
-                col_constraint_len: this.state.images[this.props.image]["col_constraint_len"],
-                row_constraint: this.state.images[this.props.image]["row_constraint"],
-                col_constraint: this.state.images[this.props.image]["col_constraint"],
-            }, () => this.setState({
-                grid: this.constructGrid()
-            }))
+            if (this.props.image !== "None") {
+                this.setState({
+                    row_constraint_len: this.state.images[this.props.image]["row_constraint_len"],
+                    col_constraint_len: this.state.images[this.props.image]["col_constraint_len"],
+                    row_constraint: this.state.images[this.props.image]["row_constraint"],
+                    col_constraint: this.state.images[this.props.image]["col_constraint"],
+                }, () => this.setState({
+                    grid: this.constructGrid()
+                }))
+            }
+            else {
+                let [row_constraint, col_constraint] = this.constructConstraints()
+                this.setState({
+                    row_constraint_len: 1,
+                    col_constraint_len: 1,
+                    row_constraint: row_constraint,
+                    col_constraint: col_constraint
+                }, this.setState({
+                    grid: this.constructGrid()
+                }))
+            }
+
         }
         else if (prevProps.rows !== this.props.rows || prevProps.cols !== this.props.cols) {
             let [row_constraint, col_constraint] = this.constructConstraints()
@@ -250,26 +265,9 @@ export default class Grid extends Component {
                             style["border-top"] = "2px solid black"
                         }
 
-
-
-                        // if (i < this.state.row_constraint_len && j === this.state.row_constraint_len - 1) {
-                        //     style["border-left"] = "2px solid black"
-
-                        // }
-
-                        // if (i === this.state.row_constraint_len && j < this.state.row_constraint_len) {
-                        //     style["border-top"] = "2px solid black"
-
-                        // }
-
-
                         if (i >= this.state.row_constraint_len && j === 0) {
                             style["border-left"] = "2px solid black"
                         }
-
-                        // if (j === this.state.col_constraint_len - 1) {
-                        //     style["border-right"] = "2px solid black"
-                        // }
 
                         if (i === this.state.row_constraint_len && j < this.state.col_constraint_len) {
                             style["border-top"] = "2px solid black"
@@ -315,8 +313,8 @@ export default class Grid extends Component {
                     }
 
                     let style = {
-                        "border-top": "1px dashed gray",
-                        "border-left": "1px dashed gray",
+                        "border-top": this.props.border_val,
+                        "border-left": this.props.border_val,
                         "border-right": "",
                         "border-bottom": "none",
                         "background-color": "white",
@@ -327,7 +325,7 @@ export default class Grid extends Component {
                         if (i === this.state.row_constraint_len) {
                             style["border-top"] = "2px solid black"
                         }
-                        else {
+                        else if (this.props.show_border) {
                             style["border-top"] = "2px solid gray"
                         }
                     }
@@ -335,7 +333,7 @@ export default class Grid extends Component {
                         if (j === this.state.col_constraint_len) {
                             style["border-left"] = "2px solid black"
                         }
-                        else {
+                        else if (this.props.show_border) {
                             style["border-left"] = "2px solid gray"
                         }
                     }
@@ -345,7 +343,7 @@ export default class Grid extends Component {
                     }
 
                     else if (element === -2) {
-                        return <div className="gridSquare" style={style}>X</div>
+                        return <div className="gridSquare" style={style}>{this.props.excluded_val}</div>
                     }
 
                     else {
