@@ -19,6 +19,7 @@ export default class Page extends Component {
             exitPopup: false,
             animation: false,
             animation_rate: 100,
+            replay_animation: false,
             solver: "DFS",
             image: "Duck",
             border_val: "1px dashed gray",
@@ -34,6 +35,7 @@ export default class Page extends Component {
         this.clickHandler = this.clickHandler.bind(this)
         this.animationToggle = this.animationToggle.bind(this)
         this.animationRateToggle = this.animationRateToggle.bind(this)
+        this.replayAnimation = this.replayAnimation.bind(this)
         this.solverToggle = this.solverToggle.bind(this)
         this.imageToggle = this.imageToggle.bind(this)
         this.borderToggle = this.borderToggle.bind(this)
@@ -45,6 +47,7 @@ export default class Page extends Component {
         if (Number.isInteger(+value) && +value > 0 && +value < 26) {
             newState[name] = value
             newState["image"] = "None"
+            newState["response"] = null
             if (+value > 15) {
                 newState["solver"] = "heuristic"
             }
@@ -69,7 +72,6 @@ export default class Page extends Component {
     }
 
     getData() {
-        // const url = "http://127.0.0.1:5000"
         const url = "https://picross-solver.herokuapp.com"
         axios({
             method: 'post',
@@ -170,6 +172,7 @@ export default class Page extends Component {
                     image: "Duck",
                     rows: 15,
                     cols: 15,
+                    response: null
                 })
             }
             if (this.state.image === "Duck") {
@@ -177,7 +180,8 @@ export default class Page extends Component {
                     image: "Camera",
                     rows: 20,
                     cols: 20,
-                    solver: "heuristic"
+                    solver: "heuristic",
+                    response: null
                 })
             }
             if (this.state.image === "Camera") {
@@ -185,7 +189,8 @@ export default class Page extends Component {
                     image: "Teapot",
                     rows: 20,
                     cols: 20,
-                    solver: "heuristic"
+                    solver: "heuristic",
+                    response: null
                 })
             }
             if (this.state.image === "Teapot") {
@@ -193,7 +198,8 @@ export default class Page extends Component {
                     image: "Crab",
                     rows: 24,
                     cols: 24,
-                    solver: "heuristic"
+                    solver: "heuristic",
+                    response: null
                 })
             }
             if (this.state.image === "Crab") {
@@ -201,7 +207,8 @@ export default class Page extends Component {
                     image: "Koala",
                     rows: 25,
                     cols: 25,
-                    solver: "heuristic"
+                    solver: "heuristic",
+                    response: null
                 })
             }
             if (this.state.image === "Koala") {
@@ -209,7 +216,8 @@ export default class Page extends Component {
                     image: "Tea",
                     rows: 25,
                     cols: 25,
-                    solver: "heuristic"
+                    solver: "heuristic",
+                    response: null
                 })
             }
             if (this.state.image === "Tea") {
@@ -217,7 +225,8 @@ export default class Page extends Component {
                     image: "Duck",
                     rows: 15,
                     cols: 15,
-                    solver: "heuristic"
+                    solver: "heuristic",
+                    response: null
                 })
             }
         })
@@ -246,6 +255,21 @@ export default class Page extends Component {
         else {
             this.setState({
                 excluded_val: "X"
+            })
+        }
+    }
+
+    replayAnimation() {
+        if (this.state.response == null) {
+            this.submit()
+        }
+        else {
+            this.setState({
+                replay_animation: true
+            }, () => {
+                this.setState({
+                    replay_animation: false
+                })
             })
         }
     }
@@ -292,11 +316,14 @@ export default class Page extends Component {
                             <div className="input-group-append">
                                 <button onClick={this.animationRateToggle} className="btn btn-outline-secondary" type="button" id="button-addon2">Animation Rate: {(1000 / this.state.animation_rate).toString().substring(0, 2) + " FPS"}</button>
                             </div>
+                            <div className="input-group-append">
+                                <button onClick={this.replayAnimation} className="btn btn-danger" type="button" id="button-addon2">Replay Animation</button>
+                            </div>
                         </div> : <span></span>}
                     </div>
                     <Grid rows={this.state.rows} cols={this.state.cols} passState={this.getGridState} grid={this.state.response}
                         submit={this.state.submit} popupIndices={this.state.popupIndices} passPopupIndices={this.getPopupIndices}
-                        animation={this.state.animation} animation_rate={this.state.animation_rate} image={this.state.image}
+                        animation={this.state.animation} animation_rate={this.state.animation_rate} replay_animation={this.state.replay_animation} image={this.state.image}
                         border_val={this.state.border_val} show_border={this.state.show_border} excluded_val={this.state.excluded_val} />
                 </div>
             </div>

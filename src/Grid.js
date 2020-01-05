@@ -59,6 +59,7 @@ export default class Grid extends Component {
         // this.state.col_constraint = col_constraint
         this.state.grid = this.constructGrid()
 
+        this.playAnimation = this.playAnimation.bind(this)
         this.constructConstraints = this.constructConstraints.bind(this)
         this.populateGrid = this.populateGrid.bind(this)
         this.constructGrid = this.constructGrid.bind(this)
@@ -125,45 +126,51 @@ export default class Grid extends Component {
                 this.populateGrid(this.props.grid)
             }
             else {
-                let grids = this.props.grid
-                let display_grids = []
-                for (let j = 0; j < this.props.grid.length; j++) {
-                    let grid = grids[j]
-                    if (grid[0].length === 1) {
-                        grid = [grid]
-                    }
-                    if (grid.length < this.props.rows) {
-                        const l = grid.length
-                        for (let i = 0; i < this.props.rows - l; i++) {
-                            let row = Array(this.props.cols)
-                            row.fill(0)
-                            grid.push(row)
-                        }
-                    }
-
-                    if (j === 0) {
-                        display_grids.push(grid)
-                    }
-                    else if (j !== 0 && grid !== display_grids[j - 1]) {
-                        display_grids.push(grid)
-                    }
-                }
-                let j = 0
-                const id = setInterval(() => {
-                    if (j >= display_grids.length) {
-                        this.populateGrid(display_grids[display_grids.length - 1])
-                        clearInterval(id)
-                    }
-                    else {
-                        const grid = display_grids[j]
-                        this.populateGrid(grid)
-                        j += 1
-                    }
-                }, this.props.animation_rate)
-                console.log(this.props.animation_rate)
-
+                this.playAnimation()
             }
         }
+
+        else if (prevProps.replay_animation !== this.props.replay_animation && this.props.replay_animation === true) {
+            this.playAnimation()
+        }
+    }
+    playAnimation() {
+        let grids = this.props.grid
+        let display_grids = []
+        for (let j = 0; j < this.props.grid.length; j++) {
+            let grid = grids[j]
+            if (grid[0].length === 1) {
+                grid = [grid]
+            }
+            if (grid.length < this.props.rows) {
+                const l = grid.length
+                for (let i = 0; i < this.props.rows - l; i++) {
+                    let row = Array(this.props.cols)
+                    row.fill(0)
+                    grid.push(row)
+                }
+            }
+
+            if (j === 0) {
+                display_grids.push(grid)
+            }
+            else if (j !== 0 && grid !== display_grids[j - 1]) {
+                display_grids.push(grid)
+            }
+        }
+        let j = 0
+        const id = setInterval(() => {
+            if (j >= display_grids.length) {
+                this.populateGrid(display_grids[display_grids.length - 1])
+                clearInterval(id)
+            }
+            else {
+                const grid = display_grids[j]
+                this.populateGrid(grid)
+                j += 1
+            }
+        }, this.props.animation_rate)
+        console.log(this.props.animation_rate)
     }
 
     populateGrid(grid_input) {
