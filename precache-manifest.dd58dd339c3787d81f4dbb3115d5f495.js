@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "344258601856690d7dda7c68ab496157",
+    "revision": "a521aff9e860be492344008be36955b5",
     "url": "/picross_solver_frontend/index.html"
   },
   {
-    "revision": "8be748fa54346567255f",
+    "revision": "82c7821011e85f2f822c",
     "url": "/picross_solver_frontend/static/css/main.b5b165ed.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/picross_solver_frontend/static/js/2.9c0d34f1.chunk.js.LICENSE"
   },
   {
-    "revision": "8be748fa54346567255f",
-    "url": "/picross_solver_frontend/static/js/main.ced12b57.chunk.js"
+    "revision": "82c7821011e85f2f822c",
+    "url": "/picross_solver_frontend/static/js/main.e5b01213.chunk.js"
   },
   {
     "revision": "01a3d8e99834679e0339",
