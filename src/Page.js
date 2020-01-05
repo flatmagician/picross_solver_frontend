@@ -135,6 +135,13 @@ export default class Page extends Component {
     imageToggle() {
         if (this.state.image === "Duck") {
             this.setState({
+                image: "Camera",
+                rows: 20,
+                cols: 20
+            })
+        }
+        if (this.state.image === "Camera") {
+            this.setState({
                 image: "Crab",
                 rows: 24,
                 cols: 24
