@@ -15,6 +15,7 @@
     height: min-content;
     margin-right: 10px;
     width: 400px;
+    min-width: 400px;
 }
 
 .rowColWrapper {
