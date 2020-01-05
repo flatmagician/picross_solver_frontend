@@ -142,6 +142,13 @@ export default class Page extends Component {
         }
         if (this.state.image === "Crab") {
             this.setState({
+                image: "Koala",
+                rows: 25,
+                cols: 25
+            })
+        }
+        if (this.state.image === "Koala") {
+            this.setState({
                 image: "Duck",
                 rows: 15,
                 cols: 15
