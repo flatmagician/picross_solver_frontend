@@ -12,6 +12,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    height: min-content;
     margin-right: 10px;
 }
 
