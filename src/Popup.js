@@ -6,14 +6,18 @@ export default class Popup extends Component {
         super(props)
 
         const left_offset = -394 + 20 * (18 - this.props.cols - this.props.colConstraint)
-
+        let top_offset = 375
+        if (this.props.animation) {
+            top_offset += 141
+        }
         this.state = {
             text: "",
             value: [],
             axis: "",
             valid: true,
             buttonText: "Press Enter to Submit",
-            left_offset: left_offset
+            left_offset: left_offset,
+            top_offset: top_offset
         }
 
 
@@ -90,7 +94,7 @@ export default class Popup extends Component {
 
     render() {
         return (
-            <div className="popup" onKeyDown={this.onKeyDown} style={{ "left": this.state.left_offset }}>
+            <div className="popup" onKeyDown={this.onKeyDown} style={{ "left": this.state.left_offset, "top": this.state.top_offset }}>
 
                 <div className="input-group mb-3" onSubmit={this.handleSubmit}>
                     <span className="input-group-addon addon-small">{this.state.text}</span>

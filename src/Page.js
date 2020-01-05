@@ -18,6 +18,7 @@ export default class Page extends Component {
             popupIndices: [-1, -1],
             exitPopup: false,
             animation: false,
+            animation_rate: 100,
             solver: "DFS",
             image: "Duck",
             border_val: "1px dashed gray",
@@ -32,6 +33,7 @@ export default class Page extends Component {
         this.getPopupIndices = this.getPopupIndices.bind(this)
         this.clickHandler = this.clickHandler.bind(this)
         this.animationToggle = this.animationToggle.bind(this)
+        this.animationRateToggle = this.animationRateToggle.bind(this)
         this.solverToggle = this.solverToggle.bind(this)
         this.imageToggle = this.imageToggle.bind(this)
         this.borderToggle = this.borderToggle.bind(this)
@@ -126,6 +128,19 @@ export default class Page extends Component {
         this.setState({
             animation: !this.state.animation
         })
+    }
+
+    animationRateToggle() {
+        if (this.state.animation_rate > 20) {
+            this.setState({
+                animation_rate: this.state.animation_rate - 20
+            })
+        }
+        else {
+            this.setState({
+                animation_rate: 100
+            })
+        }
     }
 
     solverToggle() {
@@ -272,10 +287,17 @@ export default class Page extends Component {
                             </div>
                             <input type="submit" value="Solve Puzzle!" className="btn btn-warning" onClick={this.submit} />
                         </div>
+                        {this.state.animation === true ? <h5 className="settings">Animation Settings:</h5> : <span></span>}
+                        {this.state.animation === true ? <div className="submissionWrapper">
+                            <div className="input-group-append">
+                                <button onClick={this.animationRateToggle} className="btn btn-outline-secondary" type="button" id="button-addon2">Animation Rate: {(1000 / this.state.animation_rate).toString().substring(0, 2) + " FPS"}</button>
+                            </div>
+                        </div> : <span></span>}
                     </div>
                     <Grid rows={this.state.rows} cols={this.state.cols} passState={this.getGridState} grid={this.state.response}
                         submit={this.state.submit} popupIndices={this.state.popupIndices} passPopupIndices={this.getPopupIndices}
-                        animation={this.state.animation} image={this.state.image} border_val={this.state.border_val} show_border={this.state.show_border} excluded_val={this.state.excluded_val} />
+                        animation={this.state.animation} animation_rate={this.state.animation_rate} image={this.state.image}
+                        border_val={this.state.border_val} show_border={this.state.show_border} excluded_val={this.state.excluded_val} />
                 </div>
             </div>
         )

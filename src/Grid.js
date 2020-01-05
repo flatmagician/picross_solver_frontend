@@ -158,10 +158,9 @@ export default class Grid extends Component {
                         const grid = display_grids[j]
                         this.populateGrid(grid)
                         j += 1
-                        console.log(j)
                     }
-                }, 20)
-                // }                      
+                }, this.props.animation_rate)
+                console.log(this.props.animation_rate)
 
             }
         }
@@ -289,7 +288,7 @@ export default class Grid extends Component {
                             return <Constraint passPopupVal={this.getPopupVal} passPopupIndices={this.getPopupIndices}
                                 rows={this.props.rows} cols={this.props.cols} row={i} col={j} rowConstraint={this.state.row_constraint_len}
                                 colConstraint={this.state.col_constraint_len} showPopup={showPopup}
-                                value={val} style={style} />
+                                value={val} style={style} animation={this.props.animation} />
                         }
                         //column constraint selectors
                         if (j >= this.state.col_constraint_len) {
@@ -303,7 +302,7 @@ export default class Grid extends Component {
                             }
                             return <Constraint passPopupVal={this.getPopupVal} passPopupIndices={this.getPopupIndices}
                                 rows={this.props.rows} cols={this.props.cols} row={i} col={j} rowConstraint={this.state.row_constraint_len}
-                                colConstraint={this.state.col_constraint_len} showPopup={showPopup} value={val} style={style} />
+                                colConstraint={this.state.col_constraint_len} showPopup={showPopup} value={val} style={style} animation={this.props.animation} />
                         }
                         //unselectable gray area
                         else {

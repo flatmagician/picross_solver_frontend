@@ -89,7 +89,7 @@ export default class Constraint extends Component {
                         rows={this.props.rows} cols={this.props.cols}
                         row={this.props.row} col={this.props.col}
                         rowConstraint={this.props.rowConstraint}
-                        colConstraint={this.props.colConstraint} /> : <span></span>}
+                        colConstraint={this.props.colConstraint} animation={this.props.animation} /> : <span></span>}
                 </span>
             </span>
         )
