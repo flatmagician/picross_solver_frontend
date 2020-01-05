@@ -43,6 +43,9 @@ export default class Page extends Component {
         if (Number.isInteger(+value) && +value > 0 && +value < 26) {
             newState[name] = value
             newState["image"] = "None"
+            if (+value > 15) {
+                newState["solver"] = "heuristic"
+            }
             this.setState(newState)
         }
     }
@@ -132,9 +135,14 @@ export default class Page extends Component {
             })
         }
         if (this.state.solver === "heuristic") {
-            this.setState({
-                solver: "DFS"
-            })
+            if (this.state.rows <= 15 && this.state.cols <= 15) {
+                this.setState({
+                    solver: "DFS"
+                })
+            }
+            else {
+                alert("The dimensions of the grid are too large to use DFS")
+            }
         }
     }
 
@@ -153,42 +161,48 @@ export default class Page extends Component {
                 this.setState({
                     image: "Camera",
                     rows: 20,
-                    cols: 20
+                    cols: 20,
+                    solver: "heuristic"
                 })
             }
             if (this.state.image === "Camera") {
                 this.setState({
                     image: "Teapot",
                     rows: 20,
-                    cols: 20
+                    cols: 20,
+                    solver: "heuristic"
                 })
             }
             if (this.state.image === "Teapot") {
                 this.setState({
                     image: "Crab",
                     rows: 24,
-                    cols: 24
+                    cols: 24,
+                    solver: "heuristic"
                 })
             }
             if (this.state.image === "Crab") {
                 this.setState({
                     image: "Koala",
                     rows: 25,
-                    cols: 25
+                    cols: 25,
+                    solver: "heuristic"
                 })
             }
             if (this.state.image === "Koala") {
                 this.setState({
                     image: "Tea",
                     rows: 25,
-                    cols: 25
+                    cols: 25,
+                    solver: "heuristic"
                 })
             }
             if (this.state.image === "Tea") {
                 this.setState({
                     image: "Duck",
                     rows: 15,
-                    cols: 15
+                    cols: 15,
+                    solver: "heuristic"
                 })
             }
         })
@@ -228,6 +242,7 @@ export default class Page extends Component {
                 <p className="h4">Click on the rows and columns to add and remove constraints</p>
                 <div className="contentWrapper">
                     <div className="leftSideWrapper">
+                        <h5 className="settings">Grid Dimension Settings:</h5>
                         <div className="rowColWrapper">
                             <RowColForm name="Number of Rows (Max 25)" id="rows" passValue={this.getFormValue} val={this.state.rows} />
                             <RowColForm name="Number of Cols (Max 25)" id="cols" passValue={this.getFormValue} val={this.state.cols} />
