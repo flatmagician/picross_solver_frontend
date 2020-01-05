@@ -139,55 +139,59 @@ export default class Page extends Component {
     }
 
     imageToggle() {
-        if (this.state.image === "None") {
-            this.setState({
-                image: "Duck",
-                rows: 15,
-                cols: 15
-            })
-        }
-        if (this.state.image === "Duck") {
-            this.setState({
-                image: "Camera",
-                rows: 20,
-                cols: 20
-            })
-        }
-        if (this.state.image === "Camera") {
-            this.setState({
-                image: "Teapot",
-                rows: 20,
-                cols: 20
-            })
-        }
-        if (this.state.image === "Teapot") {
-            this.setState({
-                image: "Crab",
-                rows: 24,
-                cols: 24
-            })
-        }
-        if (this.state.image === "Crab") {
-            this.setState({
-                image: "Koala",
-                rows: 25,
-                cols: 25
-            })
-        }
-        if (this.state.image === "Koala") {
-            this.setState({
-                image: "Tea",
-                rows: 25,
-                cols: 25
-            })
-        }
-        if (this.state.image === "Tea") {
-            this.setState({
-                image: "Duck",
-                rows: 15,
-                cols: 15
-            })
-        }
+        this.setState({
+            exitPopup: true
+        }, () => {
+            if (this.state.image === "None") {
+                this.setState({
+                    image: "Duck",
+                    rows: 15,
+                    cols: 15,
+                })
+            }
+            if (this.state.image === "Duck") {
+                this.setState({
+                    image: "Camera",
+                    rows: 20,
+                    cols: 20
+                })
+            }
+            if (this.state.image === "Camera") {
+                this.setState({
+                    image: "Teapot",
+                    rows: 20,
+                    cols: 20
+                })
+            }
+            if (this.state.image === "Teapot") {
+                this.setState({
+                    image: "Crab",
+                    rows: 24,
+                    cols: 24
+                })
+            }
+            if (this.state.image === "Crab") {
+                this.setState({
+                    image: "Koala",
+                    rows: 25,
+                    cols: 25
+                })
+            }
+            if (this.state.image === "Koala") {
+                this.setState({
+                    image: "Tea",
+                    rows: 25,
+                    cols: 25
+                })
+            }
+            if (this.state.image === "Tea") {
+                this.setState({
+                    image: "Duck",
+                    rows: 15,
+                    cols: 15
+                })
+            }
+        })
     }
 
     borderToggle() {

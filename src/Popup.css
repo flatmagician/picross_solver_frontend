@@ -5,19 +5,19 @@
 .popup {
     display: flex;
     flex-direction: column;
-    position: fixed;
-    width: 180px;
+    position: absolute;
+    width: 376px;
     padding: 8px;
     height: min-content;
-    /* top: -107px; */
-    top: -16vh;
+    top: 430px;
+    /* top: -16vh; */
     left: -425px;
     right: 0;
     bottom: 0;
     margin: auto;
     background-color: rgba(50, 50, 50, .5);
     border-radius: 4px;
-    border: 2px solid rgb(50,50,50);
+    border: 2px solid rgb(50, 50, 50);
 }
 
 .btn-small {
@@ -25,5 +25,5 @@
 }
 
 .btn-danger {
-    background-color: rgb(168,175,215) !important
+    background-color: rgb(168, 175, 215) !important
 }

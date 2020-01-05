@@ -5,7 +5,7 @@ export default class Popup extends Component {
     constructor(props) {
         super(props)
 
-        const left_offset = -410 + 20*(18 - this.props.cols - this.props.rowConstraint) 
+        const left_offset = -394 + 20 * (18 - this.props.cols - this.props.colConstraint)
 
         this.state = {
             text: "",
@@ -16,7 +16,7 @@ export default class Popup extends Component {
             left_offset: left_offset
         }
 
-        
+
 
         this.getText = this.getText.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -90,7 +90,7 @@ export default class Popup extends Component {
 
     render() {
         return (
-            <div className="popup" onKeyDown={this.onKeyDown} style={{"left": this.state.left_offset}}>
+            <div className="popup" onKeyDown={this.onKeyDown} style={{ "left": this.state.left_offset }}>
 
                 <div className="input-group mb-3" onSubmit={this.handleSubmit}>
                     <span className="input-group-addon addon-small">{this.state.text}</span>

@@ -70,7 +70,6 @@ export default class Grid extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log(prevProps, this.props)
         if (prevProps.submit !== this.props.submit && this.props.submit === true) {
             this.passState()
         }
