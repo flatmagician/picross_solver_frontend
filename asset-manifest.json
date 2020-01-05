@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/picross_solver_frontend/static/css/main.daa775f4.chunk.css",
+    "main.css": "/picross_solver_frontend/static/css/main.7fbe4360.chunk.css",
     "main.js": "/picross_solver_frontend/static/js/main.8d4e9890.chunk.js",
     "main.js.map": "/picross_solver_frontend/static/js/main.8d4e9890.chunk.js.map",
     "runtime-main.js": "/picross_solver_frontend/static/js/runtime-main.0e9468ed.js",
@@ -8,15 +8,15 @@
     "static/js/2.f3da3dca.chunk.js": "/picross_solver_frontend/static/js/2.f3da3dca.chunk.js",
     "static/js/2.f3da3dca.chunk.js.map": "/picross_solver_frontend/static/js/2.f3da3dca.chunk.js.map",
     "index.html": "/picross_solver_frontend/index.html",
-    "precache-manifest.d748ae632e76e6b8ee11354ce37f6357.js": "/picross_solver_frontend/precache-manifest.d748ae632e76e6b8ee11354ce37f6357.js",
+    "precache-manifest.d0acc98623eeee55e96f44db11037eae.js": "/picross_solver_frontend/precache-manifest.d0acc98623eeee55e96f44db11037eae.js",
     "service-worker.js": "/picross_solver_frontend/service-worker.js",
-    "static/css/main.daa775f4.chunk.css.map": "/picross_solver_frontend/static/css/main.daa775f4.chunk.css.map",
+    "static/css/main.7fbe4360.chunk.css.map": "/picross_solver_frontend/static/css/main.7fbe4360.chunk.css.map",
     "static/js/2.f3da3dca.chunk.js.LICENSE": "/picross_solver_frontend/static/js/2.f3da3dca.chunk.js.LICENSE"
   },
   "entrypoints": [
     "static/js/runtime-main.0e9468ed.js",
     "static/js/2.f3da3dca.chunk.js",
-    "static/css/main.daa775f4.chunk.css",
+    "static/css/main.7fbe4360.chunk.css",
     "static/js/main.8d4e9890.chunk.js"
   ]
 }
