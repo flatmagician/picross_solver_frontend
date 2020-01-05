@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/picross_solver_frontend/static/css/main.f40a3f7c.chunk.css",
-    "main.js": "/picross_solver_frontend/static/js/main.e6d27496.chunk.js",
-    "main.js.map": "/picross_solver_frontend/static/js/main.e6d27496.chunk.js.map",
+    "main.css": "/picross_solver_frontend/static/css/main.cb9044cb.chunk.css",
+    "main.js": "/picross_solver_frontend/static/js/main.3ca6e68b.chunk.js",
+    "main.js.map": "/picross_solver_frontend/static/js/main.3ca6e68b.chunk.js.map",
     "runtime-main.js": "/picross_solver_frontend/static/js/runtime-main.0e9468ed.js",
     "runtime-main.js.map": "/picross_solver_frontend/static/js/runtime-main.0e9468ed.js.map",
     "static/js/2.f3da3dca.chunk.js": "/picross_solver_frontend/static/js/2.f3da3dca.chunk.js",
     "static/js/2.f3da3dca.chunk.js.map": "/picross_solver_frontend/static/js/2.f3da3dca.chunk.js.map",
     "index.html": "/picross_solver_frontend/index.html",
-    "precache-manifest.41ca9c9927b6a3030373fc8c1d0a8166.js": "/picross_solver_frontend/precache-manifest.41ca9c9927b6a3030373fc8c1d0a8166.js",
+    "precache-manifest.635cece8c62ce3d91254d81e08aa3305.js": "/picross_solver_frontend/precache-manifest.635cece8c62ce3d91254d81e08aa3305.js",
     "service-worker.js": "/picross_solver_frontend/service-worker.js",
-    "static/css/main.f40a3f7c.chunk.css.map": "/picross_solver_frontend/static/css/main.f40a3f7c.chunk.css.map",
+    "static/css/main.cb9044cb.chunk.css.map": "/picross_solver_frontend/static/css/main.cb9044cb.chunk.css.map",
     "static/js/2.f3da3dca.chunk.js.LICENSE": "/picross_solver_frontend/static/js/2.f3da3dca.chunk.js.LICENSE"
   },
   "entrypoints": [
     "static/js/runtime-main.0e9468ed.js",
     "static/js/2.f3da3dca.chunk.js",
-    "static/css/main.f40a3f7c.chunk.css",
-    "static/js/main.e6d27496.chunk.js"
+    "static/css/main.cb9044cb.chunk.css",
+    "static/js/main.3ca6e68b.chunk.js"
   ]
 }
