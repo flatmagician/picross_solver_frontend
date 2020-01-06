@@ -74,7 +74,13 @@ export default class Popup extends Component {
                 constraint_block_total += constraint_val
             }
         })
-        const axis = this.state.axis
+        let axis
+        if (this.state.axis === "cols") {
+            axis = "rows"
+        }
+        else {
+            axis = "cols"
+        }
         if (constraint_block_total <= this.props[axis]) {
             this.setState({
                 valid: true,
